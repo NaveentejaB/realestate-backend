@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -18,6 +19,14 @@ app.use('/api/usermanagement', userManagementRoutes);
 app.use('/api/realestateproperty', realEstatePropertyRoutes);
 
 
+// teja - using for handling async error in one place
+app.use((err, req, res, next) => {
+  console.log(err)
+  res.status(err.status || 500).json({
+      message : `Internal server error!`,
+      error : true
+  })
+})
 
 // Default route
 app.get("/api", (req, res) => {

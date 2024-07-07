@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 //const { verifyToken, authorizeUser } = require("../Middleware/authentication");
 const {verifyToken} = require("../Middleware/Auth");
+const userAuth = require("../controllers/user-management/user-auth")
 const {signupuser,loginuser,postuser,getallusers,updateuser,deleteuser} = require("../Controllers-Users/usermanagement") //userManagement
 const {postuserType,getalluserstypes,updateUserTypeById,deleteUserTypeById} = require("../Controllers-Users/userType-con"); //userType
 const {postUserCategoryXref,updateUserCategoryXref,getAllUserCategoryXrefs,deleteUserCategoryXref} = require("../Controllers-Users/UserCategoryXref")
@@ -22,7 +23,7 @@ router.delete('/deleteUserType/:id',deleteUserTypeById);
 
 /* userManagement */
 // Register user route 
-router.post("/register", signupuser);
+router.post("/register", userAuth.register);
 // Login user route  
 router.post("/login",  loginuser);
 /* --------------------------------------------------------- */

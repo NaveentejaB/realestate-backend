@@ -1,11 +1,17 @@
 const express = require("express");
 const router = express.Router();
-
+const seller = require("../controllers/real-estate/privateSeller.js")
+const buyer = require("../controllers/real-estate/privateBuyer.js")
+const {authenticate,checkRole} = require("../Middleware/authenticate.js")
 const {postCountry,getAllCountries,updateCountry,deleteCountry} = require("../Controllers-realEstate/country");
 const {postState,getAllStates,updateState,deleteState} = require("../Controllers-realEstate/state");
 const {postCity,getAllCities,updateCity,deleteCity} = require("../Controllers-realEstate/city");
 const {postImage,getAllImages,updateImage,deleteImage} = require("../Controllers-realEstate/image");
 const {postRealEstateProperty,getAllRealEstateProperties,updateRealEstateProperty,deleteRealEstateProperty} = require("../Controllers-realEstate/realEstateProperty");
+
+// test
+router.get('/seller',authenticate,checkRole('seller'),seller.testSeller)
+router.get('/buyer',authenticate,checkRole('buyer'),buyer.testBuyer)
 
 
 /* country */
